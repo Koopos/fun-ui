@@ -10,7 +10,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export function Button({ children, ...props }: ButtonProps) {
 
-    const { size = 'medium', variant = 'primary', type = 'button' } = props;
+    const { size = 'medium', variant = 'normal', type = 'button' } = props;
 
     return (
         <button
@@ -21,12 +21,14 @@ export function Button({ children, ...props }: ButtonProps) {
                 'h-10': size === 'small',
                 'h-12': size === 'medium',
                 'h-14': size === 'large',
-                'w-24': size === 'small',
-                'w-32': size === 'medium',
+                'px-2': size === 'small',
+                'px-6': size === 'medium',
+                'px-8': size === 'large',
                 'bg-blue-500 hover:bg-blue-700': variant === 'primary',
                 'bg-gray-500 hover:bg-gray-700': variant === 'normal',
+                'bg-red-500 hover:bg-red-700': variant === 'danger',
                 'cursor-pointer': true,
-                'color-white': variant === 'primary' || variant === 'danger',
+                'text-white': variant === 'primary' || variant === 'danger',
             })}
 
             {...props}
