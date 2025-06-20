@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../Theme/ThemeProvider";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
@@ -10,7 +11,16 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export function Button({ children, ...props }: ButtonProps) {
 
-    const { size = 'medium', variant = 'normal', type = 'button' } = props;
+    const theme = useContext(ThemeContext)
+
+    const { size = 'medium', variant = 'normal', type = 'button', style={}, ...rest } = props;
+
+
+     // 动态背景色
+    const dynamicStyle =
+        variant === 'primary' && theme.primaryColor
+            ? { backgroundColor: theme.primaryColor, ...style}
+            : style;
 
     return (
         <button
@@ -24,14 +34,14 @@ export function Button({ children, ...props }: ButtonProps) {
                 'px-2': size === 'small',
                 'px-6': size === 'medium',
                 'px-8': size === 'large',
-                'bg-blue-500 hover:bg-blue-700': variant === 'primary',
+            
                 'bg-gray-500 hover:bg-gray-700': variant === 'normal',
                 'bg-red-500 hover:bg-red-700': variant === 'danger',
                 'cursor-pointer': true,
                 'text-white': variant === 'primary' || variant === 'danger',
             })}
-
-            {...props}
+            style={dynamicStyle}
+         
         >
             {children}
         </button>
