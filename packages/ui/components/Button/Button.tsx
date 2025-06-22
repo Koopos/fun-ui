@@ -34,7 +34,6 @@ export function Button({ children, ...props }: ButtonProps) {
                 'px-2': size === 'small',
                 'px-6': size === 'medium',
                 'px-8': size === 'large',
-            
                 'bg-gray-500 hover:bg-gray-700': variant === 'normal',
                 'bg-red-500 hover:bg-red-700': variant === 'danger',
                 'cursor-pointer': true,
